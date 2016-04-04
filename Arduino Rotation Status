@@ -1,0 +1,32 @@
+ int topPin = 13;
+ int midPin = 12;
+ int botPin = 11;
+ int potPin = 1; 
+ int tmp;
+void setup() {
+  pinMode(topPin, OUTPUT);
+  pinMode(midPin, OUTPUT);
+  pinMode(botPin, OUTPUT);
+}
+
+void loop() {
+  tmp = analogRead(potPin); 
+  if(tmp < 333)
+  {
+    digitalWrite(botPin, HIGH);
+    digitalWrite(midPin, LOW);
+    digitalWrite(topPin, LOW);
+  }
+  if(tmp > 333 && tmp < 666)
+  {
+    digitalWrite(botPin, LOW);
+    digitalWrite(midPin, HIGH);
+    digitalWrite(topPin, LOW);
+  }
+  if(tmp > 666)
+  {
+    digitalWrite(botPin, LOW);
+    digitalWrite(midPin, LOW);
+    digitalWrite(topPin, HIGH);
+  }  
+}
