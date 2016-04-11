@@ -1,0 +1,105 @@
+
+// button input pins
+int buttonOne = 2;
+int buttonTwo = 3;
+
+// is the button currently pressed or not?
+boolean buttonOnestate = false;
+boolean buttonTwostate = false;
+
+// led pins
+int ledOne = 13;
+int ledTwo = 12;
+
+// if the button was depressed in that cycle
+boolean down1 = false;
+boolean down2 = false;
+
+
+//state of the switch used to turn lights on and off
+int switcherState1 = 0;
+int switcherState2 = 0;
+
+
+
+void setup() 
+{
+  pinMode(INPUT, buttonOne);
+  pinMode(INPUT, buttonTwo);
+  pinMode(OUTPUT, ledOne);
+  pinMode(OUTPUT, ledTwo);
+}
+
+void loop() 
+{
+  button1switcher();
+  if (switcherState1 == 1) //if the switch is on then turn on the led and so on,.
+  {
+    digitalWrite(ledOne, HIGH);  
+  }
+  if (switcherState1 == 0) //if the switch is on then turn on the led and so on,.
+  {
+    digitalWrite(ledOne, LOW);  
+  }
+
+  button2switcher();
+  if (switcherState2 == 1)
+  {
+    digitalWrite(ledTwo, HIGH);  
+  }
+    if (switcherState2 == 0)
+  {
+    digitalWrite(ledTwo, LOW);  
+  }
+}
+
+
+void button1switcher()
+{  
+  // so how this works is when the button is clicked, down 1 is true.
+  //then once the button is released AND down is still true change the switcher state and make down reset to false
+  //wow this sucks.
+   buttonOnestate = digitalRead(buttonOne);
+   if (buttonOnestate == HIGH)
+    {
+      down1 = true;
+    }
+    if ((buttonOnestate == LOW) && (down1))
+    {
+      down1 = false;
+      if (switcherState1 == 0)
+      {
+        switcherState1 = 1;
+      }
+      else
+      {
+        switcherState1 = 0;
+      }      
+    }
+}
+
+
+
+void button2switcher()
+{  
+  // so how this works is when the button is clicked, down 2 is true.
+  //then once the button is released AND down is still true change the switcher state and make down reset to false
+  //wow this sucks.
+   buttonTwostate = digitalRead(buttonTwo);
+   if (buttonTwostate == HIGH)
+    {
+      down2 = true;
+    }
+    if ((buttonTwostate == LOW) && (down2))
+    {
+      down2 = false;
+      if (switcherState2 == 0)
+      {
+        switcherState2 = 1;
+      }
+      else
+      {
+        switcherState2 = 0;
+      }
+    }
+}
